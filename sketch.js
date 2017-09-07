@@ -141,6 +141,9 @@ function Lantern() {
 
 
 function mouseClicked() {
+  
+  if(bool == true)
+  {
   for (var i = 0; i < lantern.length; i++) {
     if (lantern[i].isInside() == true) {
       lantern[i].death = true;
@@ -155,10 +158,13 @@ function mouseClicked() {
       }
     }
   }
+  }
 }
 
 function touchStarted()
 {
+  if(bool == false)
+  {
   /*
   for (var i = 0; i < lantern.length; i++)
     if (lantern[i].isInside() == true)
@@ -169,6 +175,7 @@ function touchStarted()
   for (var i = 0; i < lantern.length; i++)
     if (lantern[i].isInside() == true)
       lantern[i].death = true;
+  }
 }
 
 function touchEnded()
