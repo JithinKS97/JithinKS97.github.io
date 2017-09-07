@@ -1,217 +1,185 @@
-var osc, graphs = [], started = false, ampMove = false, graphNo=-1, vessel, liquid, outline, spring, mass, transLayer, damping, arrow; //ampMove to check if amplitude slider is in use, graphNo to keep track of the current graph
+var lantern = [],
+  mSize, bg, crowd, timer = 0,
+  dyuthi, logo, gec, t = 0,
+  wind, tap = 0,bool=true,tap=0;
 
-function setup()
-{
-  createCanvas(1280, 720);
-  
-  LoadImages();
-  
-  createP('');
-  
-  osc = new Oscillator(createVector(width/8,0), height/2);
-  
-  amp = createSlider(0, height/4, 0);
-  amp.input(ampMoved);
-  amp.changed(ampChanged);
-  amp.style("width","25%")
-  
-  createP("Amplitude");
-  
-  dConst = createSlider(0,100,0);
-  dConst.input(dMoved);
-  dConst.style("width","25%");
-
-  createP("Damping Constant");
-  
-  button1 = createButton("Start");
-  button2 = createButton("Stop");
-  button3 = createButton("Clear");
-
-  
-  button1.mousePressed(start);
-  button2.mousePressed(stop);
-  button3.mousePressed(clr);
-}
-
-function LoadImages()
-{
-  liquid = loadImage("Images/liquid.png");
-  vessel = loadImage("Images/vessel.png");
-  outline = loadImage("Images/outline.png");
-  spring = loadImage("Images/spring.png")
-  mass = loadImage("Images/mass.png")
-  transLayer = loadImage("Images/transLayer.png");
-  damping = loadImage("Images/damping.png");
-  arrow = loadImage("Images/arrow.png");
-}
-
-function ampMoved()
-{
-  osc.dis = -amp.value(); // to set the amplitude of the oscillator with the value present in the slider
-  if(graphNo>=0)
-  {
-    if(graphs[graphNo].drawStat == true)  
-      graphs[graphNo].drawStat = false;  // to stop the graph from drawing if slider is moved
+function setup() {
+  var x = window.innerWidth;
+  var y = window.innerHeight;
+  if (y < 500)
+    y = 500;
+  if (x < 800) {
+    var myCanvas = createCanvas(x, y + 1);
+    mSize = width / 9;
+    bool=false;
+  } else {
+    var myCanvas = createCanvas(x - 15, y);
+    mSize = width / 24;
   }
-  ampMove = true;
-  osc.vel = 0;
-  if(started == true) //  to stop the oscillator
-    started = false;
-}
+  myCanvas.parent('can');
+  for (var i = 0; i < 80; i++)
+    lantern.push(new Lantern());
+  for (var i = 0; i < lantern.length; i++) {
 
-function ampChanged()
-{
-  ampMove = false;
-}
-
-function dMoved()
-{
-  osc.dis = -amp.value(); // to set the amplitude of the oscillator with the value present in the slider
-  if(graphNo>=0)
-  {
-    if(graphs[graphNo].drawStat == true)  
-      graphs[graphNo].drawStat = false;  // to stop the graph from drawing if slider is moved
-  }
-  
-}
-
-function start()
-{
-  if(started == false) // if oscillator is moving at present, pressing start shouln't affect its motion.
-  {
-    started = true;
-    osc.dis = -amp.value();
-    if(abs(osc.dis)>0)  // graph should be drawn only if the oscillator is moving
-    {
-      graphs.push(new Graph());
-      graphNo++;
-      graphs[graphNo].drawStat = true;
-    }
-  }
-}
-
-function clr()
-{
-  graphs.splice(0,graphs.length);
-  graphNo = -1;
-  started = false;
-}
-
-
-function stop()
-{
-  started = false;  // to stop the drawing of the graph
-  if(graphNo>=0)
-    graphs[graphNo].drawStat = false;
-  osc.vel = 0;  // when the oscillator is stopped, its veloicty is set to zero so that when it starts the next time, starting velocity is zero
-}
-
-function draw()
-{
-  background(0);
-  Coord();
-  
-  osc.b = map(dConst.value(),0,100,0,0.4);
-  
-  osc.applyForce();
-  
-  if(graphNo>=0)
-    graphs[graphNo].add(osc.dis); // to add the the displacement value to the graph
-  
-  for(var i=0;i<graphs.length;i++)
-    graphs[i].plot();
-  
-  if(ampMove == false && started == true)
-    osc.update();
-  osc.display();
-  
-  push()
-  translate(width/2,height*17/20);
-  imageMode(CENTER);
-  image(damping,0,0,width/2.45,width/15);
-  imageMode(CORNER);
-  image(arrow,-width/5.75 + map(dConst.value(),0,100,0,width/3.1),width/30,width/50,width/50);
-  pop();
-}
-
-function Oscillator(pivot, length)
-{
-  this.dis = 0, this.vel = 0, this.acc = 0;
-  this.display = function()
-  {
-    rectMode(CENTER);
-    image(vessel,0,0,width/5,height);
-    image(liquid,0,0,width/5,height);
-    image(mass,0,this.dis,width/5,height);
-    image(spring, width/10-width/55, width/41,width/20, height/2-width/20+this.dis);
-    image(outline,0,0,width/5,height);
-    image(transLayer,0,0,width/5,height);
-  }
-  
-  this.update = function()
-  {
-    this.vel += this.acc;
-    this.dis += this.vel;
-  }
-  
-  this.applyForce = function()
-  {
-    this.k=0.01, this.b;
-    this.acc = -this.k * this.dis - this.vel*this.b;
-  }
-}
-
-function Graph()
-{
-  colorMode(HSL);
-  this.y = [], this.size = 0, this.drawStat = false, this.col = color(random(0, 360), random(50,100), random(50, 90));
-  this.plot = function()
-  {
-    push();
-
-    translate(width/5, height/2);
-    
-    stroke(255);
-    strokeWeight(width/450);
-  
-    line(0,0,width*4/5,0);
-    line(0,-height/2,0,height/2);
-    
-    stroke(this.col);
-    strokeWeight(width/400);
-    
-    for(var i=1;i<this.size;i++)
-    {
-      var prevX, prevY;
-      line(prevX, prevY, (width/425)*i,this.y[i]);   // the graph is scaled in x axis by multiplying by 3
-      prevX = (width/425)*i;
-      prevY = this.y[i];
-    }
-    pop();
-  }
-  
-  this.add = function(m)
-  {
-    if(this.drawStat == true && this.size*(width/425)<width*4/5) //to prevent the graph from drawing after it passes canvas this.size*3<width*4/5
-    {
-      this.y[this.size] = m;
-      this.size++;
-    }
+    lantern[i].img = loadImage("data/" + int(random(4)) + ".png");
+    if (i > lantern.length / 2)
+      lantern[i].w = (i + 1) * mSize / lantern.length;
     else
+      lantern[i].w = (lantern.length / 2 + 1) * mSize / lantern.length;
+    lantern[i].vel.y = -lantern[i].w / 100;
+  }
+  bg = loadImage("data/bg.png");
+  dyuthi = loadImage("data/dyuthi.png");
+  logo = loadImage("data/logo.png");
+}
+
+function draw() {
+  image(bg, 0, 0, width, height);
+
+  var thewind = createVector(wind, 0);
+  var randWind = createVector(map(noise(t), 0, 1, -height / 8000, height / 8000), 0);
+  var x = window.innerWidth;
+  for (var i = 0; i < lantern.length; i++) {
+    lantern[i].display();
+    lantern[i].upperbound();
+    lantern[i].update();
+  }
+
+  for (var i = 0; i < lantern.length; i++) {
+    if (i % 3 == 0)
+      lantern[i].applyForce(createVector(randWind.x, 0));
+    else
+      lantern[i].applyForce(createVector(-randWind.x, 0));
+
+    wind = (mouseX - width / 2) / 50000;
+    lantern[i].applyForce(thewind);
+  }
+
+
+  var x = window.innerWidth;
+  if (x <= 1010) {
+    var ratio = x / 1000;
+    if (x < 400)
+      ratio += 0.25;
+    image(dyuthi, width / 2 - dyuthi.width * ratio / 2, height / 2 - dyuthi.height * ratio / 2, dyuthi.width * ratio, dyuthi.height * ratio);
+  } else {
+    image(dyuthi, width / 2 - dyuthi.width / 2, height / 2 - dyuthi.height / 2, dyuthi.width, dyuthi.height);
+  }
+  t += 0.01;
+
+}
+
+function Lantern() {
+  this.pos = createVector(random(width), random(8 * height / 10, height * 11 / 10));
+  this.vel = createVector(0, 0);
+  this.acc = createVector(0, 0);
+  this.w = random(0, 100);
+  this.v = 0;
+  this.img;
+  this.death = false;
+  this.trigger = 0;
+
+  this.display = function() {
+    imageMode(CENTER);
+    image(this.img, this.pos.x, this.pos.y, this.w, this.w);
+    imageMode(CORNER);
+  }
+
+  this.upperbound = function() {
+    if (this.pos.y < -this.w)
+      this.pos.y = height + this.w;
+    if (this.pos.x > width + this.w / 2) {
+      this.pos.x = -this.w / 2
+      this.vel.x = width / 200;
+    }
+    if (this.pos.x < -this.w / 2) {
+      this.pos.x = width + this.w / 2;
+      this.vel.x = -width / 200;
+    }
+  }
+
+  this.update = function() {
+    this.pos.add(this.vel);
+    this.vel.add(this.acc);
+    if (this.vel.x > 3)
+      this.vel.x = 3;
+    if (this.vel.x < -3)
+      this.vel.x = -3;
+    this.acc.mult(0);
+    this.vel.x *= 0.9;
+    if (this.death == true) {
+      var dx = this.w / 4;
+      this.w -= dx;
+    }
+  }
+  this.applyForce = function(x) {
+    this.acc.add(x);
+  }
+
+  this.isInside = function()
+  {
+    if (bool==true)  //this should run if its desktop
     {
-      this.drawStat = false;
-      stop();
+      if (mouseX > this.pos.x - this.w / 2 && mouseX < this.pos.x + this.w / 2 && mouseY > this.pos.y - this.w / 2 && mouseY < this.pos.y + this.w / 2)
+        return true;
+      else
+        return false;
+    }
+    else if (bool==false)  //this should run if its mobile
+    {
+        for (var i = 0; i < touches.length; i++)
+        {
+          if (touches[i].x > this.pos.x - this.w / 2 && touches[i].x < this.pos.x + this.w / 2 && touches[i].y > this.pos.y - this.w / 2 && touches[i] < this.pos.y + this.w / 2)
+            return true;
+          else
+            return false;
+        }
+    }
+  }
+
+}
+
+
+function mouseClicked() {
+  for (var i = 0; i < lantern.length; i++) {
+    if (lantern[i].isInside() == true) {
+      lantern[i].death = true;
+      if(bool==true){
+        tap += 1;
+        console.log("Click");
+        if (tap == 10)
+        setTimeout(function() {
+          var date2=new Date();
+          alert("Time taken: "+(date2.getTime()-date1.getTime())/1000 +' seconds');
+        }, 1000);
+      }
     }
   }
 }
 
-function Coord()
+function touchStarted()
 {
-    push();
-    translate(width/5, height/2);
-    stroke(255);
-    strokeWeight(width/500);
-    line(0,0,width*4/5,0);
-    line(0,-height/2,0,height/2);
-    pop();
+  for (var i = 0; i < lantern.length; i++)
+    if (lantern[i].isInside() == true)
+      lantern[i].trigger = 1;
+    else
+      lantern[i].trigger = 0;
+}
+
+function touchEnded()
+{
+  for (var i = 0; i < lantern.length; i++)
+    if (lantern[i].trigger == 1){
+      lantern[i].death = true;
+      if(bool==false){
+        tap += 1;
+        console.log("Mob");
+        console.log("Mob");
+        if (tap == 10)
+          setTimeout(function() {
+            var date2=new Date();
+            alert("Time taken: "+(date2.getTime()-date1.getTime())/1000 +' seconds');
+          }, 1000);
+    }
+  }
 }
