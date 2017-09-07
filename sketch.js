@@ -19,6 +19,7 @@ function setup()
   
   dConst = createSlider(0,100,0);
   dConst.input(dMoved);
+  dConst.style("width","25%");
 
   createP("Damping Constant");
   
