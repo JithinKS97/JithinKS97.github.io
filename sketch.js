@@ -127,11 +127,13 @@ function Lantern() {
     }
     else if (bool==false)  //this should run if its mobile
     {
-      if (mouseX > this.pos.x - this.w / 2 && mouseX < this.pos.x + this.w / 2 && mouseY > this.pos.y - this.w / 2 && mouseY < this.pos.y + this.w / 2)
-        return true;
-      else
-        return false;
-        
+        for (var i = 0; i < touches.length; i++)
+        {
+          if (touches[i].x > this.pos.x - this.w / 2 && touches[i].x < this.pos.x + this.w / 2 && touches[i].y > this.pos.y - this.w / 2 && touches[i] < this.pos.y + this.w / 2)
+            return true;
+          else
+            return false;
+        }
     }
   }
 
@@ -157,15 +159,21 @@ function mouseClicked() {
 
 function touchStarted()
 {
+  /*
   for (var i = 0; i < lantern.length; i++)
     if (lantern[i].isInside() == true)
       lantern[i].trigger = 1;
     else
       lantern[i].trigger = 0;
+  */
+  for (var i = 0; i < lantern.length; i++)
+    if (lantern[i].isInside() == true)
+      lantern[i].death = true;
 }
 
 function touchEnded()
 {
+  /*
   for (var i = 0; i < lantern.length; i++)
     if (lantern[i].trigger == 1){
       lantern[i].death = true;
@@ -180,4 +188,7 @@ function touchEnded()
           }, 1000);
     }
   }
+  */
+  
+  
 }
