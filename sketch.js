@@ -13,6 +13,7 @@ function setup()
   amp = createSlider(0, height/4, 0);
   amp.input(ampMoved);
   amp.changed(ampChanged);
+  amp.style("width","25%")
   
   createP("Amplitude");
   
