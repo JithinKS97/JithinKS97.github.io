@@ -130,9 +130,13 @@ function Lantern() {
         for (var i = 0; i < touches.length; i++)
         {
           if (touches[i].x > this.pos.x - this.w / 2 && touches[i].x < this.pos.x + this.w / 2 && touches[i].y > this.pos.y - this.w / 2 && touches[i] < this.pos.y + this.w / 2)
-            return true;
+          {
+            fill(0);
+            rect(width/2,height/2,width/2,height/2);
+          }
           else
             return false;
+          }
         }
     }
   }
