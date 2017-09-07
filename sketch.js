@@ -13,13 +13,13 @@ function setup()
   amp = createSlider(0, height/4, 0);
   amp.input(ampMoved);
   amp.changed(ampChanged);
-  amp.style("width","25%")
+  amp.style("width","100%")
   
   createP("Amplitude");
   
   dConst = createSlider(0,100,0);
   dConst.input(dMoved);
-  dConst.style("width","25%");
+  dConst.style("width","100%");
 
   createP("Damping Constant");
   
