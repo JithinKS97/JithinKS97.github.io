@@ -7,8 +7,8 @@ function setup() {
   for(var i=1;i<110;i++)
   {
     a[i-1] = loadImage("Images/"+i+".png");
-    m[i-1] = random(10000);
-    n[i-1] = random(-1000,1000);
+    m[i-1] = (i+10)*20;
+    m[i-1] = (i+10)*20;
   }
 }
 
