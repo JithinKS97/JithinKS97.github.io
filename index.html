@@ -1,42 +1,17 @@
-<!--
-	NOTES:
-	1. All tokens are represented by '$' sign in the template.
-	2. You can write your code only wherever mentioned.
-	3. "DO NOT" alter the tokens in the template html as they are required during publishing.
--->
-
 <!DOCTYPE html>
 <html>
-<head>
-<meta charset="UTF-8">
-<title>Untitled-3</title>
-<!-- write your code here -->
+  <head>
+    <meta charset="UTF-8">
+    <title>GEC</title>
+    <script src="libraries/p5.js" type="text/javascript"></script>
 
+    <script src="libraries/p5.dom.js" type="text/javascript"></script>
+    <script src="libraries/p5.sound.js" type="text/javascript"></script>
 
-<script src="https://code.createjs.com/createjs-2015.11.26.min.js"></script>
-<script src="Untitled-3.js"></script>
-<script>
-var canvas, stage, exportRoot;
-function init() {
-	// --- write your JS code here ---
-	
-	canvas = document.getElementById("canvas");
-	exportRoot = new lib.Untitled3();
+    <script src="sketch.js" type="text/javascript"></script>
 
-	stage = new createjs.Stage(canvas);
-	stage.addChild(exportRoot);
-	stage.update();
-
-	createjs.Ticker.setFPS(lib.properties.fps);
-	createjs.Ticker.addEventListener("tick", stage);
-}
-
-</script>
-
-<!-- write your code here -->
-
-</head>
-<body onload="init();" style="background-color:#D4D4D4;margin:0px;">
-	<canvas id="canvas" width="800" height="800" style="background-color:#FFFFFF"></canvas>
-</body>
+    <style> body {padding: 0; margin: 0;} canvas {vertical-align: top;} </style>
+  </head>
+  <body>
+  </body>
 </html>
