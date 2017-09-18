@@ -9,19 +9,19 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>mmmm</title>
+<title>Main combined</title>
 <!-- write your code here -->
 
 
 <script src="https://code.createjs.com/createjs-2015.11.26.min.js"></script>
-<script src="mmmm.js"></script>
+<script src="Main combined.js"></script>
 <script>
 var canvas, stage, exportRoot;
 function init() {
 	// --- write your JS code here ---
 	
 	canvas = document.getElementById("canvas");
-	exportRoot = new lib.mmmm();
+	exportRoot = new lib.Maincombined();
 
 	stage = new createjs.Stage(canvas);
 	stage.addChild(exportRoot);
@@ -37,6 +37,6 @@ function init() {
 
 </head>
 <body onload="init();" style="background-color:#D4D4D4;margin:0px;">
-	<canvas id="canvas" width="1000" height="500" style="background-color:#FFFFFF"></canvas>
+	<canvas id="canvas" width="2000" height="1000" style="background-color:#FFFFFF"></canvas>
 </body>
 </html>
