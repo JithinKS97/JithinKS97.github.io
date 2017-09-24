@@ -1,0 +1,46 @@
+
+<svg xmlns="http://www.w3.org/2000/svg" version="1.1" xmlns:xlink="http://www.w3.org/1999/xlink" preserveAspectRatio="none" x="0px" y="0px" width="120px" height="70px" viewBox="0 0 120 70">
+<defs>
+<filter id="Filter_1" x="-20%" y="-100%" width="140%" height="300%" color-interpolation-filters="sRGB">
+<feGaussianBlur in="SourceGraphic" stdDeviation="1,1" result="result1"/>
+
+<feColorMatrix in="result1" type="matrix" values="1 0 0 0 0 0 1 0 0 0 0 0 1 0 0 0 0 0 0.27 0" result="result2"/>
+</filter>
+
+<filter id="Filter_2" x="-20%" y="-47.85096679918781%" width="140%" height="195.7019335983756%" color-interpolation-filters="sRGB">
+<feGaussianBlur in="SourceGraphic" stdDeviation="3,3" result="result1"/>
+
+<feColorMatrix in="result1" type="matrix" values="1 0 0 0 0 0 1 0 0 0 0 0 1 0 0 0 0 0 0.27 0" result="result2"/>
+</filter>
+
+<g id="Symbol_8_0_Layer0_0_FILL">
+<path fill="#FFFF66" stroke="none" d="
+M 80.65 0.85
+Q 66.8 0 47.25 0 27.7 0 13.85 0.85 0 1.75 0 3 0 4.25 13.85 5.1 27.7 6 47.25 6 66.8 6 80.65 5.1 94.5 4.25 94.5 3 94.5 1.75 80.65 0.85 Z"/>
+</g>
+
+<g id="Symbol_7_0_Layer0_0_FILL">
+<path fill="#FFFF66" stroke="none" d="
+M 95.25 35.25
+L 120.75 10.75 120.75 4
+Q 84.85 12.45 36.7 23.45 5.55 31 0 35.25
+L 95.25 35.25 Z"/>
+</g>
+</defs>
+
+<g filter="url(#Filter_1)" transform="matrix( 1, 0, 0, 1, 0,0) ">
+<g transform="matrix( 1, 0, 0, 1, 4,64) ">
+<g transform="matrix( 1, 0, 0, 1, 0,0) ">
+<use xlink:href="#Symbol_8_0_Layer0_0_FILL"/>
+</g>
+</g>
+</g>
+
+<g filter="url(#Filter_2)" transform="matrix( 1, 0, 0, 1, 0,0) ">
+<g transform="matrix( 1, 0, 0, 1, 0,32.5) ">
+<g transform="matrix( 1, 0, 0, 1, 0,0) ">
+<use xlink:href="#Symbol_7_0_Layer0_0_FILL"/>
+</g>
+</g>
+</g>
+</svg>
