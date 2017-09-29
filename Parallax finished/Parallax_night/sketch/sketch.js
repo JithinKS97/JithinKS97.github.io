@@ -16,6 +16,9 @@ var lightUp = [1, 1, 1, 1, 1, 1];
 var blight;
 var p=0.7;
 
+var mobile = false;
+
+
 function preload()
 {
 	for(var i=1;i<=11;i++)
@@ -41,11 +44,22 @@ function preload()
 		light[i] = loadImage("window/"+i+".svg")
 	
 	blight = loadImage("Cropped/blight.svg");
+
+	if( windowWidth < 2 * windowHeight/3 )
+		mobile = true;
 }
 
+var ws,hs;
 function setup()
 {
-	createCanvas(1280,720);
+	width = 1280;
+	height = 720;
+	
+	ws = width/1280;
+	hs = height/720;
+	
+
+	createCanvas(width, height);
 	press = createVector(width/2, height/2);
 	dPos = createVector(width/2,height/2);
 	dVel = createVector();
@@ -100,7 +114,7 @@ function draw()
 
 	if( timer%3 == 0)
 	  flicker();
-	image(img[1],offx[1],offy[1]);
+	image(img[1],offx[1],offy[1],img[1].width*ws,img[1].height*hs);
 
 	for (var i = 0; i < lantern.length; i++)
 	{
@@ -114,15 +128,15 @@ function draw()
 	{
 		imageMode(CORNER);
 		if(i<=10 && i!=8 && i!=4)
-	    image(img[i],x[i]+offx[i],offy[i]);
+	    image(img[i],x[i]+offx[i],offy[i],img[i].width*ws,img[i].height*hs);
 		else if(i==11)
 		{
 			push();
 			imageMode(CENTER);
-			dVel.limit(5);
+			dVel.limit(10);
 			translate(dPos.x, dPos.y);
-			rotate(dVel.x/10);
-			image(img[i],0,0);
+			rotate(dVel.x/20);
+			image(img[i],0,0,img[i].width*ws,img[i].height*hs);
 
 			if(timer>=30)
 			  fill(255,0,0);
@@ -131,38 +145,36 @@ function draw()
 
 
 			noStroke();
-			ellipse(img[i].width/3,-img[i].height/8,3,3);
-			ellipse(-img[i].width/3,-img[i].height/8,3,3);
+			ellipse(img[i].width*ws/3,-img[i].height*hs/8,3,3);
+			ellipse(-img[i].width*ws/3,-img[i].height*hs/8,3,3);
 			pop();
 			dVel.mult(0.97);
 			imageMode(CORNER);
 		}
 		else if(i==8)
 			{
-				image(img[i],x[i]+offx[8]+busp,offy[8]);
-				image(blight,x[i]+offx[8]+busp-img[i].width/2.2,offy[8]);
+				image(img[i],x[i]+offx[8]+busp,offy[8],img[i].width*ws,img[i].height*hs);
+				image(blight,x[i]+offx[8]+busp-img[i].width*ws/2.2,offy[8],blight.width*ws,blight.height*hs);
 			}
 		else if(i==4)
 		{
-			image(img[i],x[i]+offx[i],offy[i]);
+			image(img[i],x[i]+offx[i],offy[i],img[i].width*ws,img[i].height*hs);
 			if(lightUp[0] != 0)
-				image(light[1],x[i]+offx[i]+width/5.4065,offy[i]+height/65.5856);
+				image(light[1],x[i]+offx[i]+width/5.4065,offy[i]+height/65.5856,light[1].width*ws,light[1].height*hs);
 			if(lightUp[1] != 0)
-				image(light[2],x[i]+offx[i]+width/4.1605,offy[i]+height/65.5856);
+				image(light[2],x[i]+offx[i]+width/4.1605,offy[i]+height/65.5856,light[2].width*ws,light[2].height*hs);
 			if(lightUp[2] != 0)
-				image(light[3],x[i]+offx[i]+width/3.3750,offy[i]+height/65.5856);
+				image(light[3],x[i]+offx[i]+width/3.3750,offy[i]+height/65.5856,light[3].width*ws,light[3].height*hs);
 			if(lightUp[3] !=0 )
-				image(light[4],x[i]+offx[i]+width/2.8777,offy[i]+height/65.5856);
+				image(light[4],x[i]+offx[i]+width/2.8777,offy[i]+height/65.5856,light[4].width*ws,light[4].height*hs);
 			if(lightUp[4] != 0)
-				image(light[5],x[i]+offx[i]+width/2.4961,offy[i]+height/65.5856);
+				image(light[5],x[i]+offx[i]+width/2.4961,offy[i]+height/65.5856,light[5].width*ws,light[5].height*hs);
 			if(lightUp[5] != 0)
-			  image(light[6],x[i]+offx[i]+width/2.2061,offy[i]+height/65.5856);
+			  image(light[6],x[i]+offx[i]+width/2.2061,offy[i]+height/65.5856,light[6].width*ws,light[6].height*hs);
 			
 		}
 
 		var mouseFromCenter = mouseX-width/2;
-
-		var mobile = false;
 
     if(!mobile)
 		{
@@ -188,7 +200,7 @@ function draw()
 	     		busv*=-1;
 		    	busp = width-img[8].width-(x[8]+offx[8]);
 	    	}
-	    if(x[8]+offx[8]+busp<-img[8].width+img[8].width)
+	    if(x[8]+offx[8]+busp<-img[8].width+width)
 	    {
 		    busv*=-1;
 		    busp = - (x[8]+offx[8]);
@@ -224,7 +236,7 @@ function Lantern()
 	this.display = function()
 	{
 	  imageMode(CENTER);
-	  image(this.img, this.pos.x, this.pos.y, this.w, this.w);
+	  image(this.img, this.pos.x, this.pos.y, this.w*ws, this.w*hs);
 	  imageMode(CORNER);
 	}
   
