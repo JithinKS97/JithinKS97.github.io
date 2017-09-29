@@ -16,7 +16,7 @@ var lightUp = [1, 1, 1, 1, 1, 1];
 var blight;
 var p=0.7;
 
-var mobile = false;
+var mobile = true;
 
 
 function preload()
@@ -175,7 +175,7 @@ function draw()
 		}
 
 		var mouseFromCenter = mouseX-width/2;
-
+		
     if(!mobile)
 		{
 	       var target;
