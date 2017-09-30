@@ -135,7 +135,7 @@ function draw()
 			imageMode(CENTER);
 			dVel.limit(10);
 			translate(dPos.x, dPos.y);
-			rotate(dVel.x/20);
+			rotate(dVel.x/15);
 			image(img[i],0,0,img[i].width*ws,img[i].height*hs);
 
 			if(timer>=30)
@@ -175,7 +175,7 @@ function draw()
 		}
 
 		var mouseFromCenter = mouseX-width/2;
-		
+
     if(!mobile)
 		{
 	       var target;
@@ -188,7 +188,7 @@ function draw()
 
     if(mobile)
 		{
-			  var rot = map(rotationY,-180,180,-15,15);
+			  var rot = map(rotationX,-180,180,-15,15);
 				x[i] = map(rot, -15, 15, -width/2.5, width/2.5)*10/pow((12-i),2);
 				
     		busv += busa;
@@ -200,7 +200,7 @@ function draw()
 	     		busv*=-1;
 		    	busp = width-img[8].width-(x[8]+offx[8]);
 	    	}
-	    if(x[8]+offx[8]+busp<-img[8].width+width)
+	    if(x[8]+offx[8]+busp<0)
 	    {
 		    busv*=-1;
 		    busp = - (x[8]+offx[8]);
