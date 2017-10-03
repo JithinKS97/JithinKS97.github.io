@@ -9,6 +9,7 @@ function setup()
 
 function draw()
 {
+  background(0);
   osc.display();
   osc.update();
   gra.plot(osc.d)
