@@ -2,7 +2,7 @@ class Oscillator
 {
   constructor()
   {
-    this.d = h/5;
+    this.d = -h/5;
     this.v = 0;
     this.a = 0;
   }
