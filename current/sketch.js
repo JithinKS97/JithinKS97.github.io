@@ -12,4 +12,5 @@ function draw()
 {
   background(0);
   osc.display();
+  osc.update();
 }
