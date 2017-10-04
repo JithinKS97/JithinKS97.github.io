@@ -9,7 +9,8 @@ function setup()
 
 function draw()
 {
-  background(0);
+  colorMode(HSL);
+  background(255);
   osc.display();
   osc.update();
   gra.plot(osc.d)

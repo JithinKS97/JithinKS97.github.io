@@ -9,7 +9,6 @@ class Oscillator
 
   display()
   {
-    colorMode(HSL);
     fill(218, 100, 50);
     noStroke();
     push();
@@ -22,6 +21,6 @@ class Oscillator
   {
     this.v += this.a;
     this.d += this.v;
-    this.a = -0.005*this.d;
+    this.a = -0.005*this.d - 0.01*this.v;
   }
 }

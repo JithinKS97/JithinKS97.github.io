@@ -2,13 +2,12 @@ class Graph
 {
   constructor()
   {
-    this.t = 0;
-    this.graphPts = new Points();
+    this.graphs = new Points();
   }
 
   plot(y)
   {
-    this.graphPts.pts[this.graphPts.pts.length] = y;
+    this.graphs.y[this.graphs.y.length] = y;
     push();
     translate(w/5, h/2);
     strokeWeight(5);
@@ -16,7 +15,6 @@ class Graph
     for(let i=0;i<this.graphPts.pts.length;i++)
       point(i,this.graphPts.pts[i]);
     pop();
-    this.t++;
   }
 }
 
@@ -24,6 +22,6 @@ class Points
 {
   constructor()
   {
-    this.pts = [];
+    this.y = [];
   }
 }
