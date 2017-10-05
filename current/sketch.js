@@ -6,8 +6,13 @@ function setup()
   osc = new Oscillator();
   gra = new Graph();
   start = createButton('start');
+
   amp = createSlider(0,h/5,0);
   amp.input(ampMoved);
+
+  damp = createSlider(0,100,0);
+  damp.input(dampMoved);
+
   start.mousePressed(startPressed);
   clear = createButton('clear');
   clear.mousePressed(clearPressed);
@@ -23,18 +28,28 @@ function ampMoved()
   }
 }
 
+function dampMoved()
+{
+  stat = false;
+  if(gra.graphs.length>=1) //If amplitude is changed inbetween oscillator should stop
+  {
+    gra.graphs[gra.graphs.length-1].end = true
+    osc.v=0;
+  }
+}
+
 function startPressed()
 {
   stat = !stat;
-  if(stat == true && abs(osc.d)>0) //abs(osc.d)>0 to ensure that graph is plotted only once mover starts moving
+  if(stat == true && abs(osc.d)>0) //abs(osc.d)>0 to ensure that graph is plotted only once the oscillator starts moving
   {
     start.html("stop");
-    gra.graphs.push(new Points());
+    gra.graphs.push(new Points()); //New graph point set is created when start button is pressed
   }
   else if(stat == false)
   {
    start.html("start");
-   gra.graphs[gra.graphs.length-1].end = true;
+   gra.graphs[gra.graphs.length-1].end = true; ///To stop tne the drawing of the graph when stop button is pressed
    osc.d = amp.value();
    osc.v=0;
   }
@@ -42,7 +57,7 @@ function startPressed()
 
 function clearPressed()
 {
-  for(let i=gra.graphs.length;i>=1;i--)
+  for(let i=gra.graphs.length;i>=1;i--) //Erases all the graphs
     gra.graphs.pop();
   stat = false;
   osc.v = 0;
@@ -61,6 +76,7 @@ function draw()
   }
   else{
     osc.d = -amp.value();
+    osc.damp = map(damp.value(), 0, 100, 0, 0.1);
   }
 
   if(stat == false)
