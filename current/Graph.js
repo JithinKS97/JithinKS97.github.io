@@ -21,7 +21,6 @@ class Graph
         line(x-1,this.graphs[i].y[x-1], x, this.graphs[i].y[x]);
       }
       pop();
-      
     }
   }
 }

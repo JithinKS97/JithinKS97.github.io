@@ -6,8 +6,19 @@ function setup()
   osc = new Oscillator();
   gra = new Graph();
   start = createButton('start');
-  amp = createSlider();
+  amp = createSlider(0,h/5,0);
+  amp.input(ampMoved);
   start.mousePressed(startPressed);
+}
+
+function ampMoved()
+{
+  stat = false;
+  if(gra.graphs.length>=1)
+  {
+    gra.graphs[gra.graphs.length-1].end = true;
+    osc.v=0;
+  }
 }
 
 function draw()
@@ -21,21 +32,25 @@ function draw()
   {
     osc.update();
   }
+  else{
+    osc.d = -amp.value();
+  }
+  print(stat);
 }
 
 function startPressed()
 {
   stat = !stat;
-  if(stat == true)
+  if(stat == true && abs(osc.d)>0)
   {
     start.html("stop");
     gra.graphs.push(new Points());
   }
-  else
+  else if(stat == false)
   {
    start.html("start");
    gra.graphs[gra.graphs.length-1].end = true;
-   osc.d = -h/5;
+   osc.d = amp.value();
    osc.v=0;
   }
 }
