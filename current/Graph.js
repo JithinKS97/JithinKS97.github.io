@@ -10,7 +10,7 @@ class Graph
     for(let i=0;i<this.graphs.length;i++)
     {
       if(this.graphs[i].end == false)
-        this.graphs[i].y[this.graphs[i].y.length] = y;
+        this.graphs[i].y[this.graphs[i].y.length] = y; //Points are added to the array of graphs
 
       push();
       translate(w/5, h/2);

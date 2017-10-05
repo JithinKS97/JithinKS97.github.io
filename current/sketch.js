@@ -14,9 +14,9 @@ function setup()
 function ampMoved()
 {
   stat = false;
-  if(gra.graphs.length>=1)
+  if(gra.graphs.length>=1) //If amplitude is changed inbetween oscillator should stop
   {
-    gra.graphs[gra.graphs.length-1].end = true;
+    gra.graphs[gra.graphs.length-1].end = true
     osc.v=0;
   }
 }
@@ -41,7 +41,7 @@ function draw()
 function startPressed()
 {
   stat = !stat;
-  if(stat == true && abs(osc.d)>0)
+  if(stat == true && abs(osc.d)>0) //abs(osc.d)>0 to ensure that graph is plotted only once mover starts moving
   {
     start.html("stop");
     gra.graphs.push(new Points());
