@@ -66,7 +66,7 @@ function clearPressed()
 function draw()
 {
   colorMode(HSL);
-  background(255);
+  background(0);
   drawCoord();
   osc.display();
   gra.plot(osc.d);
@@ -88,7 +88,7 @@ function drawCoord()
   push();
   translate(w/5, h/2);
   strokeWeight(w/250);
-  stroke(0);
+  stroke(255);
   line(0, 0 , w*4/5, 0);
   line(0,-h/2,0,h/2);
   pop();
