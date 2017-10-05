@@ -21,7 +21,7 @@ function setup()
 function ampMoved()
 {
   stat = false;
-  if(gra.graphs.length>=1) //If amplitude is changed inbetween oscillator should stop
+  if(gra.graphs.length>=1) //If amplitude is changed inbetween, oscillator should stop
   {
     gra.graphs[gra.graphs.length-1].end = true
     osc.v=0;
@@ -44,7 +44,7 @@ function startPressed()
   if(stat == true && abs(osc.d)>0) //abs(osc.d)>0 to ensure that graph is plotted only once the oscillator starts moving
   {
     start.html("stop");
-    gra.graphs.push(new Points()); //New graph point set is created when start button is pressed
+    gra.graphs.push(new Points()); //New graph points set is created when start button is pressed
   }
   else if(stat == false)
   {
@@ -66,7 +66,7 @@ function clearPressed()
 function draw()
 {
   colorMode(HSL);
-  background(0);
+  background(255);
   drawCoord();
   osc.display();
   gra.plot(osc.d);
@@ -75,12 +75,12 @@ function draw()
     osc.update();
   }
   else{
-    osc.d = -amp.value();
-    osc.damp = map(damp.value(), 0, 100, 0, 0.1);
+    osc.d = -amp.value(); //Applying amplitude to the oscillator
+    osc.damp = map(damp.value(), 0, 100, 0, 0.1); //Applying dampening to the oscillator
   }
 
   if(stat == false)
-   start.html("start");
+   start.html('start');
 }
 
 function drawCoord()
@@ -88,7 +88,7 @@ function drawCoord()
   push();
   translate(w/5, h/2);
   strokeWeight(w/250);
-  stroke(255);
+  stroke(0);
   line(0, 0 , w*4/5, 0);
   line(0,-h/2,0,h/2);
   pop();
