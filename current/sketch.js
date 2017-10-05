@@ -1,4 +1,4 @@
-let osc, gra, w=640, h=360, start, stat = false, amp;
+let osc, gra, w=640, h=360, start, clear, stat = false, amp;
 
 function setup()
 {
@@ -9,6 +9,8 @@ function setup()
   amp = createSlider(0,h/5,0);
   amp.input(ampMoved);
   start.mousePressed(startPressed);
+  clear = createButton('clear');
+  clear.mousePressed(clearPressed);
 }
 
 function ampMoved()
@@ -19,23 +21,6 @@ function ampMoved()
     gra.graphs[gra.graphs.length-1].end = true
     osc.v=0;
   }
-}
-
-function draw()
-{
-  colorMode(HSL);
-  background(0);
-  drawCoord();
-  osc.display();
-  gra.plot(osc.d);
-  if(stat == true)
-  {
-    osc.update();
-  }
-  else{
-    osc.d = -amp.value();
-  }
-  print(stat);
 }
 
 function startPressed()
@@ -53,6 +38,33 @@ function startPressed()
    osc.d = amp.value();
    osc.v=0;
   }
+}
+
+function clearPressed()
+{
+  for(let i=gra.graphs.length;i>=1;i--)
+    gra.graphs.pop();
+  stat = false;
+  osc.v = 0;
+}
+
+function draw()
+{
+  colorMode(HSL);
+  background(0);
+  drawCoord();
+  osc.display();
+  gra.plot(osc.d);
+  if(stat == true)
+  {
+    osc.update();
+  }
+  else{
+    osc.d = -amp.value();
+  }
+
+  if(stat == false)
+   start.html("start");
 }
 
 function drawCoord()
