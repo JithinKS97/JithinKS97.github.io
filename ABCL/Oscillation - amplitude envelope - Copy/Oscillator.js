@@ -6,6 +6,7 @@ class Oscillator
     this.v = 0;
     this.a = 0;
     this.damp = 0;
+    this.initAmp = 0;
   }
 
   display()
