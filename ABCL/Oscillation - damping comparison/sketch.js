@@ -48,10 +48,10 @@ function startPressed()
   }
   else if(stat == false)
   {
-   start.html("start");
-   gra.graphs[gra.graphs.length-1].end = true; ///To stop tne the drawing of the graph when stop button is pressed
-   osc.d = amp.value();
-   osc.v=0;
+    start.html("start");
+    gra.graphs[gra.graphs.length-1].end = true; ///To stop the the drawing of the graph when stop button is pressed
+    osc.d = amp.value();
+    osc.v=0;
   }
 }
 
@@ -66,21 +66,23 @@ function clearPressed()
 function draw()
 {
   colorMode(HSL);
-  background(0);
+  background(255);
   drawCoord();
   osc.display();
   gra.plot(osc.d);
+  line()
   if(stat == true)
   {
     osc.update();
   }
   else{
     osc.d = -amp.value(); //Applying amplitude to the oscillator
-    osc.damp = map(damp.value(), 0, 100, 0, 0.1); //Applying dampening to the oscillator
+    osc.damp = map(damp.value(), 0, 100, 0, 0.2); //Applying dampening to the oscillator
   }
 
   if(stat == false)
-   start.html('start');
+    start.html('start');
+
 }
 
 function drawCoord()
@@ -88,7 +90,7 @@ function drawCoord()
   push();
   translate(w/5, h/2);
   strokeWeight(w/250);
-  stroke(255);
+  stroke(30);
   line(0, 0 , w*4/5, 0);
   line(0,-h/2,0,h/2);
   pop();
