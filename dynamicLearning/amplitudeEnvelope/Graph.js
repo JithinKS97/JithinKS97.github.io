@@ -1,3 +1,5 @@
+let s;
+
 class Graph
 {
   constructor()
@@ -62,3 +64,4 @@ class Points
     this.y = [];
   }
 }
+

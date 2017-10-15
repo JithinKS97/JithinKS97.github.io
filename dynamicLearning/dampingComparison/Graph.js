@@ -33,7 +33,7 @@ class Points
   {
     this.y = [];
     colorMode(HSL);
-    this.col = color(random(0, 360), 80, random(40, 70));
+    this.col = color(random(0, 360), 80, random(40, 50));
     this.end = false;
   }
 }
