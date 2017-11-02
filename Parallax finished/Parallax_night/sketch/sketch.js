@@ -16,7 +16,7 @@ var lightUp = [1, 1, 1, 1, 1, 1];
 var blight;
 var p=0.7;
 
-var mobile = true;
+var mobile = false;
 
 
 function preload()
