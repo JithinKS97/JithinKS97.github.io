@@ -92,9 +92,11 @@ function draw()
     fill(255);
     rectMode(CENTER);
     fill(230,180,50);
+    
     rect(obs1p.x, obs1p.y, obs1p.w, obs1p.h);  
     rect(obs2p.x, obs2p.y, obs2p.w, obs2p.h);
     rect(obs3p.x, obs3p.y, obs3p.w, obs3p.h);
+    
 
     for(var i=0;i<bulls.length;i++)
     {
@@ -160,7 +162,7 @@ function bullets()
         {
             if(this.marked == false)
             {
-                print("bingo");
+                //print("bingo");
                 print(floor(this.bull.position.y));
                 this.marked = true;
                 gra[floor(this.bull.position.y/(height/n))]+=incRate;
