@@ -57,6 +57,15 @@ function graph()
     
     pop();
     pop();
+    
+    if(mouseX-width/4 - v.x < 100 &&  -(mouseY-height*3/4) - v.y <100)
+    {
+        if(mouseIsPressed)
+        {
+            v.x = mouseX - width/4;
+            v.y = -(mouseY-height*3/4);
+        }
+    }
 }
 
 function dottedline(x1,y1,x2,y2)
