@@ -24,10 +24,44 @@ function draw()
         if(create == true)
         {
             p[p.length-1].pos.x = mouseX;
-            p[p.length-1].pos.y = mouseY;
+            p[p.length-1].pos.y = mouseY; 
         }
+
         p[i].isInside();
+
         p[i].moveProton();
+
+        var vec = createVector();
+
+        for(var j=0;j<p.length;j++)
+        {
+            if(i!=j)
+            {
+                p[i].calcForce(p[j]);
+                newV = createVector(p[j].pos.x,p[j].pos.y);
+                newV.sub(p[i].pos);
+                vec.add(newV);
+            }
+        }
+
+        push();
+        translate(p[i].pos.x, p[i].pos.y);
+        vec.div(10);
+        arrowLine(0,0,vec.x,vec.y);
+        pop();
+        
+        if(currMov>=0)
+        {
+            if(p[currMov].pos.x>width || p[currMov].pos.x<0 ||p[currMov].pos.y>height || p[currMov].pos.y<0)
+            {
+                p.splice(currMov,1);
+                print(currMov);
+                currMov = -1;
+                break;
+            }
+        }
+
+
     }
 }
 
@@ -43,7 +77,6 @@ function mousePressed()
         if(p[i].mouseOver)
         {
             p[i].move = true;
-            print("hello");
             currMov = i;
         }
     }
@@ -89,4 +122,35 @@ class Proton
             this.pos.y = mouseY;
         }
     }
+    calcForce(other)
+    {
+        stroke(255);
+        strokeWeight(3);
+        var vec = createVector(other.pos.x,other.pos.y);
+        vec.sub(this.pos);
+        vec.normalize();
+        vec.mult(100);
+        push();
+        translate(this.pos.x,this.pos.y);
+        //arrowLine(0,0,vec.x,vec.y);
+        pop();
+    }
+}
+
+function arrowLine(x1,y1,x2,y2)
+{
+    var v = createVector(x1,y1,x2,y2);
+    var tw = v.mag()/10;
+
+    line(x1,y1,x2,y2);
+
+    var angle = atan2(y2-y1,x2-x1);
+
+    rectMode(CENTER);
+    push();
+    translate(x2,y2);
+    rotate(angle);
+    strokeWeight(4);
+    triangle(1.5*tw,0,0,tw,0,-tw);
+    pop();
 }
