@@ -40,7 +40,7 @@ function graph()
 
     push();
 
-    angle = map(s.value(),0,100,0,2*PI);
+    angle = map(s.value(),0,100,0,PI);
 
     rotate(-angle);
 
@@ -58,13 +58,10 @@ function graph()
     pop();
     pop();
     
-    if(mouseX-width/4 - v.x < 100 &&  -(mouseY-height*3/4) - v.y <100)
+    if(mouseIsPressed && mouseX<width && mouseX>0 && mouseY>0 && mouseY<height)
     {
-        if(mouseIsPressed)
-        {
-            v.x = mouseX - width/4;
-            v.y = -(mouseY-height*3/4);
-        }
+        v.x = mouseX - width/4;
+        v.y = -(mouseY-height*3/4);
     }
 }
 
