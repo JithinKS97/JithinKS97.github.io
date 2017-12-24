@@ -1,5 +1,5 @@
 var p = [];
-var d = 30;
+var d = 20;
 var mp;
 var create = false;
 var col;
