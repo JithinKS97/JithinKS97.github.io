@@ -230,7 +230,9 @@ function arrowLine(x1,y1,x2,y2)
     var v = createVector(x2,y2)
     v.mult(5);
     v.limit(150);
-    var tw =v.mag()/12;
+    var tw =v.mag()/14;
+    if(tw>8)
+        tw=8;
     stroke(255);
     strokeWeight(3);
     line(x1,y1,v.x,v.y);
