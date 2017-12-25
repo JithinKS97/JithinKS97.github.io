@@ -1,10 +1,11 @@
-var img1, img2, d = 40, p = [], overP= false, curMov= -1, eC = 5000000, nC=500000;
+var img1, img2, d = 40, p = [], overP= false, curMov= -1, k = 35;
 
 var electrical, nuclear, total;
 
 var es = false;
 var ns = false;
 var ts = false;
+var ms = false;
 
 function setup()
 {
@@ -17,10 +18,12 @@ function setup()
     electrical = createCheckbox('Electrical force', false);
     nuclear = createCheckbox('Nuclear force',false);
     total = createCheckbox('Net force', false);
+    move = createCheckbox('Motion',false);
 
     electrical.changed(ec);
     nuclear.changed(nc);
     total.changed(tc);
+    move.changed(mv);
 
 
     /*var theta = 0;
@@ -49,6 +52,10 @@ function tc()
     ts = !ts;
 }
 
+function mv()
+{
+    ms = !ms;
+}
 
 
 function draw()
@@ -79,7 +86,8 @@ function electricForce()
         d.sub(p[i].pos);
         r = d.mag();
         d.normalize();
-        d.mult(-eC/pow(r,2));
+        d.mult(1/(pow(r/k,2))+0.5);
+        d.mult(-k);
         net.add(d)
       }
     }
@@ -100,11 +108,14 @@ function nuclearForce()
         d.sub(p[i].pos);
         r = d.mag();
         d.normalize();
-        d.mult((100/r)*exp(750/r));
+        d.mult((1.9/pow(r/k,1)-1/pow(r/k,3)));
+        d.mult(k);
         net.add(d)
       }
     }
     p[i].NF = net;
+    if(ms == true)
+        p[i].update();
   }
 }
 
@@ -158,9 +169,10 @@ class Proton
     update()
     {
         this.acc = this.TF.div(10);
+        this.acc.limit(1);
         this.vel.add(this.acc);
         this.pos.add(this.vel);
-        this.vel.limit(2);
+        this.vel.limit(1);
     }
 
 }
@@ -215,14 +227,14 @@ function mouseReleased()
 
 function arrowLine(x1,y1,x2,y2)
 {
-    var v = createVector(x2,y2,x1,y1);
+    var v = createVector(x2,y2)
+    v.mult(5);
     v.limit(150);
-    var tw = v.mag()/20;
+    var tw =v.mag()/12;
     stroke(255);
     strokeWeight(3);
     line(x1,y1,v.x,v.y);
-    
-
+    stroke(255);
     var angle = atan2(y2-y1,x2-x1);
 
     rectMode(CENTER);
