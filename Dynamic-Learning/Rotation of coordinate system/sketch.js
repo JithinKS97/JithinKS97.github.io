@@ -1,5 +1,5 @@
 var v;
-var s;
+var s;zz
 
 function setup()
 {
