@@ -17,9 +17,13 @@ function setup()
     img4 = loadImage("Images/pSourceB.png");
 
     electrical = createCheckbox('Electrical force', false);
+    electrical.parent('box');
     nuclear = createCheckbox('Nuclear force',false);
+    nuclear.parent('box');
     total = createCheckbox('Net force', false);
+    total.parent('box');
     move = createCheckbox('Motion',false);
+    move.parent('box');
 
     electrical.changed(ec);
     nuclear.changed(nc);
