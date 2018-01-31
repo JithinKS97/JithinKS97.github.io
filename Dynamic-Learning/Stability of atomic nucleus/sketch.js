@@ -2,10 +2,13 @@ var img1, img2, d = 40, p = [], overP= false, curMov= -1, k = 35;
 
 var electrical, nuclear, total;
 
-var es = false;
-var ns = false;
-var ts = false;
-var ms = false;
+var ElectricalForce = false;
+var NuclearForce = false;
+var NetForce = false;
+var Motion = false;
+
+var gui;
+var a = true;
 
 function setup()
 {
@@ -15,15 +18,8 @@ function setup()
     img3 = loadImage("Images/pSource.png");
     img4 = loadImage("Images/pSourceB.png");
 
-    electrical = createCheckbox('Electrical force', false);
-    nuclear = createCheckbox('Nuclear force',false);
-    total = createCheckbox('Net force', false);
-    move = createCheckbox('Motion',false);
-
-    electrical.changed(ec);
-    nuclear.changed(nc);
-    total.changed(tc);
-    move.changed(mv);
+    gui = createGui('Show');
+    gui.addGlobals('ElectricalForce', 'NuclearForce', 'NetForce', 'Motion');
 
 
     /*var theta = 0;
@@ -37,25 +33,6 @@ function setup()
     }*/
 }
 
-function ec()
-{
-    es = !es;
-}
-
-function nc()
-{
-    ns = !ns;
-}
-
-function tc()
-{
-    ts = !ts;
-}
-
-function mv()
-{
-    ms = !ms;
-}
 
 
 function draw()
@@ -114,7 +91,7 @@ function nuclearForce()
       }
     }
     p[i].NF = net;
-    if(ms == true)
+    if(Motion == true)
         p[i].update();
   }
 }
@@ -155,14 +132,14 @@ class Proton
     {
         push();
         translate(this.pos.x, this.pos.y);
-        if(es == true)
+        if(ElectricalForce == true)
             arrowLine(0,0,this.EF.x, this.EF.y);
-        if(ns == true)
+        if(NuclearForce == true)
             arrowLine(0,0,this.NF.x, this.NF.y);
         this.TF = p5.Vector.add(this.NF,this.EF);
-        if(ts == true)
+        if(NetForce == true)
             arrowLine(0,0,this.TF.x, this.TF.y);
-        if(this.moving == true && es == false && ns == false && ts == false)
+        if(this.moving == true && ElectricalForce == false && NuclearForce == false && NetForce == false)
             arrowLine(0,0,this.TF.x, this.TF.y);
         pop();
     }
