@@ -1,17 +1,14 @@
-let m, showPos, posStat = true, showVel, velStat = true, showAcc, accStat = true, activate = false;
+var m, showPos = true, posStat = true, showVel=true, velStat = true, showAcc=true, accStat = true, activate = false, gui;
 
 function setup()
 {
   createCanvas(640, 360);
   m = new mover();
-  showPos = createCheckbox('Position', true);
-  showPos.changed(showPosition);
-  showVel = createCheckbox('Velocity', true);
-  showVel.changed(showVelocity);
-  showAcc = createCheckbox('Acceleration', true);
-  showAcc.changed(showAcceleration);
   step = createButton('step');
   step.mousePressed(stepButton);
+  gui = createGui('Show');
+  gui.addGlobals("showPos", "showVel", "showAcc");
+
 
 }
 
@@ -34,35 +31,26 @@ function stop()
   noLoop();
 }
 
-function showPosition()
-{
-  if (this.checked())
-    posStat = true;
-  else
-    posStat = false;
-}
-
-function showVelocity()
-{
-  if (this.checked())
-    velStat = true;
-   else
-    velStat = false;
-}
-
-function showAcceleration()
-{
-  if (this.checked())
-    accStat = true;
-  else
-    accStat = false;
-}
-
 function draw()
 {
-  background(51);
+  background(0);
   m.display();
   m.drag();
   m.update();
   drawVector(m);
+
+  if (showPos == true)
+  posStat = true;
+  else
+  posStat = false;
+
+  if (showVel == true)
+  velStat = true;
+  else
+  velStat = false;
+
+  if (showAcc == true)
+  accStat = true;
+  else
+  accStat = false;
 }

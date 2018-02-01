@@ -17,9 +17,9 @@ class mover
     rectMode(CENTER);
     stroke(255);
     strokeWeight(2);
-    fill(127);
+    fill(0);
     if (this.dragging)
-      fill(200);
+      fill(0);
     rect(this.pos,0,this.sid, this.sid);
     pop();
   }
