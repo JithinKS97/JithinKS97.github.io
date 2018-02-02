@@ -4,15 +4,15 @@ function setup()
 {
   createCanvas(640, 360);
   m = new mover();
-  step = createButton('step');
-  step.mousePressed(stepButton);
+  //step = createButton('step');
+  //step.mousePressed(stepButton);
   gui = createGui('Show');
   gui.addGlobals("showPos", "showVel", "showAcc");
 
 
 }
 
-function stepButton()
+/*function stepButton()
 {
   if(activate == false)
   {
@@ -24,7 +24,7 @@ function stepButton()
     setInterval(stop,50);
     loop();
   }
-}
+}*/
 
 function stop()
 {
