@@ -31,7 +31,7 @@ function drawParabola(a, b, c)
 {
   noFill();
   let prevX, prevY;
-  for(let x = -width/2; x<width/2; x+=1/unit)
+  for(let x = -width/2; x<width/2; x+=1*(unit/4)/unit)
   {
     stroke(220,50,80);
     strokeWeight(4/unit);
