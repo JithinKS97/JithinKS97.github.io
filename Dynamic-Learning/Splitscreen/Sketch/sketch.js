@@ -9,7 +9,11 @@ var ms = false;
 
 function setup()
 {
-    var canvas = createCanvas(640, 360);
+    // var canvas = createCanvas(640, 360);
+
+    var parentObj = $("#simulation-window");
+    // var canvas = createCanvas(640, 360);
+    var canvas = createCanvas(parentObj.width(), parentObj.height());
     canvas.parent('sketch-holder');
     img1 = loadImage("Images/proton.png");
     img2 = loadImage("Images/protonBright.png");

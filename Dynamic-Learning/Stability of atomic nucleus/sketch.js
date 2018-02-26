@@ -1,4 +1,4 @@
-var img1, img2, d = 40, p = [], overP= false, curMov= -1, k = 35;
+var img1, img2, d = 40, p = [], overP= false, curMov= -1, k = 35, interact = false;
 
 var electrical, nuclear, total;
 
@@ -185,21 +185,27 @@ function protonSource()
 
 function mousePressed()
 {
-    if(overP == true)
-        p.push(new Proton(mouseX, mouseY)); // New proton created
+    if(interact == true)
+    {
+        if(overP == true)
+            p.push(new Proton(mouseX, mouseY)); // New proton created
 
-    for(var i=0;i<p.length;i++)
-        if(p[i].mouseIsOver())
-        {
-            p[i].moving = true; //To move the proton if mouse is over it and pressed, moving is set to true, curMov set to i to keep track which proton to stop moving when mouse Released
-            curMov = i;
-        }
-}
+        for(var i=0;i<p.length;i++)
+            if(p[i].mouseIsOver())
+            {
+                p[i].moving = true; //To move the proton if mouse is over it and pressed, moving is set to true, curMov set to i to keep track which proton to stop moving when mouse Released
+                curMov = i;
+            }
+    }
+}   
 
 function mouseReleased()
 {
-    if(curMov>=0)
-        p[curMov].moving = false; // To stop the movement of the proton
+    if(interact == true)
+    {
+        if(curMov>=0)
+            p[curMov].moving = false; // To stop the movement of the proton
+    }
 }
 
 function arrowLine(x1,y1,x2,y2)
