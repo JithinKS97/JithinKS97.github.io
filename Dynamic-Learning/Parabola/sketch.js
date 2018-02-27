@@ -1,4 +1,4 @@
-let unit = 50;
+let unit = 30, d;
 
 var a = 1, aMin = -10, aMax = 10, aStep = 0.1;
 var b = 0, bMin = -10, bMax = 10, bStep = 0.1;
@@ -8,9 +8,9 @@ var gui;
 
 function setup()
 {
-  createCanvas(1000, 800);
+  createCanvas(640, 360);
 
-  gui = createGui(' ');
+  gui = createGui('Change');
   gui.addGlobals('a', 'b', 'c');
 
 }
@@ -25,6 +25,11 @@ function draw()
   scale(unit);
   drawParabola(a, b, c);
   pop();
+  textSize(width/25);
+  fill(255);
+  d = b*b-4*a*c;
+  d = d.toFixed(1);
+  text("Discriminant:"+d, (1/40)*width, (19/20)*height);
 }
 
 function drawParabola(a, b, c)
