@@ -9,7 +9,6 @@ function setup()
   change.addRange("c", -10, 10, 0, 0.1, function(value) { });
   change.addButton("reset", function(value) { change.setValue("a", 1); change.setValue("b", 0); change.setValue("c", 0);})
   a = b = c = 0;
-
 }
 
 function draw()
@@ -44,7 +43,7 @@ function draw()
   i = i.toFixed(1);
   text("Discriminant:"+d, (1/40)*width, (19/20)*height);
   text("x1: "+ x1 + (d<0 ? " + "+i+"i" : "") , (30/40)*width, (17/20)*height);
-  text("x2: "+ x2 + (d<0 ? " + "+i+"i" : "") , (30/40)*width, (19/20)*height);
+  text("x2: "+ x2 + (d<0 ? " - "+i+"i" : "") , (30/40)*width, (19/20)*height);
 }
 
 function drawParabola(a, b, c)
