@@ -1,4 +1,4 @@
-var img1, img2, d = 40, p = [], overP= false, curMov= -1, k = 35, interact = false;
+var img1, img2, d = 40, p = [], overP= false, curMov= -1, k = 35, interact = true;
 
 var electrical, nuclear, total;
 
@@ -13,10 +13,10 @@ var a = true;
 function setup()
 {
     createCanvas(640, 360);
-    img1 = loadImage("Images/proton.png");
-    img2 = loadImage("Images/protonBright.png");
-    img3 = loadImage("Images/pSource.png");
-    img4 = loadImage("Images/pSourceB.png");
+    img1 = loadImage("https://firebasestorage.googleapis.com/v0/b/test-anybodycanlearn.appspot.com/o/images%2Fstability-of-atomic-nucleus%2Fproton.png?alt=media&token=bde47ebe-82ad-4b8d-a8aa-886b27a99b7e");
+    img2 = loadImage("https://firebasestorage.googleapis.com/v0/b/test-anybodycanlearn.appspot.com/o/images%2Fstability-of-atomic-nucleus%2FprotonBright.png?alt=media&token=07075e77-c9a5-46ac-b42b-71de8dbbcce4");
+    img3 = loadImage("https://firebasestorage.googleapis.com/v0/b/test-anybodycanlearn.appspot.com/o/images%2Fstability-of-atomic-nucleus%2FpSource.png?alt=media&token=4177a67a-452f-4770-84fe-930db9f81887");
+    img4 = loadImage("https://firebasestorage.googleapis.com/v0/b/test-anybodycanlearn.appspot.com/o/images%2Fstability-of-atomic-nucleus%2FpSourceB.png?alt=media&token=a34abeff-3612-4762-9efa-9b52d635a69c");
 
     gui = createGui('Show');
     gui.addGlobals('ElectricalForce', 'NuclearForce', 'NetForce', 'Motion');

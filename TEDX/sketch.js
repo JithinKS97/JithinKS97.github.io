@@ -3,10 +3,10 @@ let b = [], t = 0, touch = false, d, co, c = [[78, 150], [93, 150], [107, 150], 
 function setup() {
     let a = createCanvas(640, 360, WEBGL);
     for (let i = 0; i < c.length; i++) {
-        d = 8 + abs(6 * cos(t));
+        d = 15 + abs(6 * cos(t));
 
-        let darkRed =  color(255 - random(0,50), random(0,50), 0 + random(0,50));
-        let lightRed = color(255 - random(0,50), random(0,50), 51 + random(0,50))
+        let darkRed =  color(255 - random(0,20), random(0,20), 0 + random(0,20));
+        let lightRed = color(255 - random(0,20), 20 - random(0,20), 20 + random(0,20))
 
         if (i < 8)
             co = darkRed;
@@ -26,15 +26,15 @@ function setup() {
             co = color(230);
         
         if(i<34)
-            d = 8 + abs(4 * cos(t));
+            d = 9 + abs(4 * cos(t));
         else
-            d = 5 + abs(3 * cos(t));
+            d = 6 + abs(3 * cos(t));
 
         if(i<43)
             b[i] = new ball(c[i][0] - width / 3.5, c[i][1] - height / 1.5, d, co);
         else
             b[i] = new ball(c[i][0] - width / 1.4, c[i][1] - height / 2.5, d, co); 
-        b[i].vel.set(20*sin(t), 20*cos(t), 20*sin(t-1));
+        b[i].vel.set(20*sin(t), 20*cos(t), 20*cos(t-1));
         t += 0.2;
     }
 }

@@ -96,7 +96,7 @@ class Perceptron
   constructor()
   {
     this.weights = [random(-1, 1), random(-1, 1), random(-1,1)];
-    this.lr = 0.1;
+    this.lr = 0.005;
   }
 
   guess(inputs)
