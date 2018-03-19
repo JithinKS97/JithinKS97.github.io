@@ -73,7 +73,7 @@ class ball {
         push();
         fill(this.c);
         translate(this.pos.x, this.pos.y, this.pos.z);
-        ellipse(0, 0, this.d, this.d);
+        rect(0, 0, this.d, this.d);
         pop();
     }
 
