@@ -26,9 +26,9 @@ function setup() {
             co = color(230);
         
         if(i<34)
-            d = 9 + abs(4 * cos(t));
+            d = 8 + abs(4 * cos(t));
         else
-            d = 6 + abs(3 * cos(t));
+            d = 5 + abs(3 * cos(t));
 
         if(i<43)
             b[i] = new ball(c[i][0] - width / 3.5, c[i][1] - height / 1.5, d, co);
@@ -80,7 +80,7 @@ class ball {
     update() {
         this.vel.add(this.acc);
         this.pos.add(this.vel);
-        this.vel.mult(0.8);
+        this.vel.mult(0.85);
         this.acc.mult(0);
         this.vel.limit(10);
     }
