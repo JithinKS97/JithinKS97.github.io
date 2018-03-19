@@ -34,7 +34,7 @@ function setup() {
             b[i] = new ball(c[i][0] - width / 3.5, c[i][1] - height / 1.5, d, co);
         else
             b[i] = new ball(c[i][0] - width / 1.4, c[i][1] - height / 2.5, d, co); 
-        b[i].vel.set(20*sin(t), 20*cos(t), 20*cos(t-1));
+        b[i].vel.set(0,0,0);
         t += 0.2;
     }
 }
@@ -80,7 +80,7 @@ class ball {
     update() {
         this.vel.add(this.acc);
         this.pos.add(this.vel);
-        this.vel.mult(0.97);
+        this.vel.mult(0.8);
         this.acc.mult(0);
         this.vel.limit(10);
     }
