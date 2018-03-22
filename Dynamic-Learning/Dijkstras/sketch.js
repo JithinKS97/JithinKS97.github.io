@@ -3,8 +3,21 @@ let nodes = [], graph, currMov = -1, source, destination, currSel = -1, prevA, a
 function setup()
 {
   createCanvas(1500, 620);
-  for(let i=0;i<7;i++)
-    nodes[i] = new Node();
+  nodes[0] = new Node(width/5,height/4);
+  nodes[1] = new Node(2*width/5,height/4);
+  nodes[2] = new Node(3*width/5,height/4);
+  nodes[3] = new Node(4*width/5,height/4);
+
+  nodes[4] = new Node(width/5,height/2);
+  nodes[5] = new Node(2*width/5,height/2);
+  nodes[6] = new Node(3*width/5,height/2);
+  nodes[7] = new Node(4*width/5,height/2);
+
+  nodes[8] = new Node(width/5,3*height/4);
+  nodes[9] = new Node(2*width/5,3*height/4);
+  nodes[10] = new Node(3*width/5,3*height/4);
+  nodes[11] = new Node(4*width/5,3*height/4);
+
   graph = new Graph(nodes);
   createP('source');
   source = createInput();
@@ -56,9 +69,9 @@ function draw()
 
 class Node
 {
-  constructor()
+  constructor(x,y)
   {
-    this.pos = createVector(random(width), random(height));
+    this.pos = createVector(x, y);
     this.mouseOver = false;
     this.move = false;
     this.d = 30;
@@ -115,11 +128,6 @@ function mousePressed()
       currMov = i;
       currSel = i;
       nodes[currSel].selected = !nodes[currSel].selected;
-      for(let m=0;i<nodes.length;m++)
-      {
-        if(m!=currSel)
-          nodes[m].selected = false;
-      }
     }
   }
 }
@@ -157,21 +165,20 @@ class Graph
     {
       this.matrix[i] = [];
       for(let j=0;j<nodes.length;j++)
-      {
-        if(i>=j){
-        if(i==j)
-          this.matrix[i][j] = 0;
-        else if(floor(random(10)) < 7)
-        {
-          this.matrix[i][j] = Infinity;
-          this.matrix[j][i] = Infinity;
-        }
-        else
-          this.matrix[i][j] = this.matrix[j][i] = dist(nodes[i].pos.x, nodes[i].pos.y, nodes[j].pos.x, nodes[j].pos.y);
-      }
+        this.matrix[i][j] = Infinity;
     }
-
-    }
+    this.matrix[0] = [0,0,Infinity,Infinity,0,Infinity,Infinity,Infinity,Infinity,0,Infinity,Infinity];
+    this.matrix[1] = [0,0,0,Infinity,Infinity,Infinity,0,Infinity,Infinity,Infinity,Infinity,Infinity];
+    this.matrix[2] = [Infinity,0,0,0,0,Infinity,Infinity,Infinity,Infinity,Infinity,Infinity,Infinity];
+    this.matrix[3] = [Infinity,Infinity,0,Infinity,Infinity,Infinity,Infinity,Infinity,Infinity,Infinity,Infinity];
+    this.matrix[4] = [0,Infinity,0,Infinity,0,0,Infinity,Infinity,0,Infinity,Infinity,Infinity];
+    this.matrix[5] = [Infinity,Infinity,Infinity,Infinity,0,0,0,Infinity,Infinity,Infinity,Infinity,Infinity];
+    this.matrix[6] = [Infinity,0,Infinity,Infinity,Infinity,0,0,0,Infinity,Infinity,Infinity,Infinity];
+    this.matrix[7] = [Infinity,Infinity,Infinity,0,Infinity,Infinity,0,0,Infinity,0,Infinity,0];
+    this.matrix[8] = [Infinity,Infinity,Infinity,Infinity,0,Infinity,Infinity,Infinity,0,0,Infinity,Infinity];
+    this.matrix[9] = [0,Infinity,Infinity,Infinity,Infinity,Infinity,Infinity,0,0,0,0,Infinity];
+    this.matrix[10] = [Infinity,Infinity,Infinity,Infinity,Infinity,Infinity,Infinity,Infinity,Infinity,0,0,0];
+    this.matrix[11] = [Infinity,Infinity,Infinity,Infinity,Infinity,Infinity,Infinity,0,Infinity,Infinity,0,0];
   }
   display(nodes)
   {
@@ -298,5 +305,3 @@ function djikstras(graph,source,dest)
   }
   return (g.shortestPath(source.toString(), dest.toString()).concat([source.toString()]).reverse());
 }
-
-// Log test, with the addition of reversing the path and prepending the first node so it's more readable
