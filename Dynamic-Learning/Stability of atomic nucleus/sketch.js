@@ -12,7 +12,7 @@ var a = true;
 
 function setup()
 {
-    createCanvas(640, 360);
+    createCanvas(900, 900);
     img1 = loadImage("Images/proton.png");
     img2 = loadImage("Images/protonBright.png");
     img3 = loadImage("Images/pSource.png");

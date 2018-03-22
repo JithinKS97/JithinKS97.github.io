@@ -67,7 +67,7 @@ function clearPressed()
 function draw()
 {
   colorMode(HSL);
-  background(255);
+  background(0);
   drawCoord();
   sp.display()
   osc.display();
@@ -92,13 +92,13 @@ function drawCoord()
   push();
   translate(w/5, h/2);
   strokeWeight(w/250);
-  stroke(30);
+  stroke(100);
   let triLen = width/50;
   line(0, 0 , w*4/5-triLen, 0);
   line(0,-h/2+triLen,0,h/2-triLen);
   pop();
 
-  fill(30);
+  fill(100);
 
   push();
   translate(width-width/50,height/2);
@@ -134,17 +134,17 @@ class Spring
         this.pos[0] = this.len/2;
         this.x = w/10;
     }
-    
+
     display()
     {
-        stroke(0);
-        strokeWeight(5);
+        stroke(100);
+        strokeWeight(w/120);
         this.angle = asin((h/2-this.len/3 + osc.d -this.len)/(this.n*this.len));
-        
+
         line(this.x,this.pos[0] - this.len/2,this.x,this.pos[0]);
         line(this.x, this.pos[0], this.x+this.len*cos(this.angle)/2, this.pos[0]+this.len*sin(this.angle)/2);
         this.pos[1] = this.pos[0]+this.len*sin(this.angle)/2;
-        
+
         for(let i=1;i<this.n;i++)
         {
             if(i%2!=0)
@@ -160,6 +160,6 @@ class Spring
         }
         line(this.x-this.len*cos(this.angle)/2, this.pos[this.n], this.x, this.pos[this.n] + this.len*sin(this.angle)/2);
         line(this.x, this.pos[this.n] + this.len*sin(this.angle)/2, this.x, this.pos[this.n] + this.len*sin(this.angle)/2+this.len/2);
-        
+
     }
 }

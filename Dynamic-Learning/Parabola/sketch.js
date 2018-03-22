@@ -3,7 +3,7 @@ let unit = 30, d, x1, x2, i, a, b, c, change;
 function setup()
 {
   createCanvas(640, 360);
-  change = QuickSettings.create(10, 10, "Change");
+  change = QuickSettings.create(100, 100, "Change");
   change.addRange("a", -10, 10, 1, 0.1, function(value) { });
   change.addRange("b", -10, 10, 0, 0.1, function(value) { });
   change.addRange("c", -10, 10, 0, 0.1, function(value) { });
@@ -41,7 +41,7 @@ function draw()
   x1 = x1.toFixed(1);
   x2 = x2.toFixed(1);
   i = i.toFixed(1);
-  text("Discriminant:"+d, (1/40)*width, (19/20)*height);
+  text("Discriminant: "+d, (1/40)*width, (19/20)*height);
   text("x1: "+ x1 + (d<0 ? " + "+i+"i" : "") , (30/40)*width, (17/20)*height);
   text("x2: "+ x2 + (d<0 ? " - "+i+"i" : "") , (30/40)*width, (19/20)*height);
 }
