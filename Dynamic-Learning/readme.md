@@ -1,3 +1,5 @@
-This is the repository of interactive simulations that I've made.
+# My collection of visualizations created in p5
 
-Open the files to see the simulation.
+I really enjoy creating visualizations that explain difficult to understand STEM concepts. This is a collection of visualizations that I made so far
+
+Please go to the individual directories from where you can view the visualizations.
